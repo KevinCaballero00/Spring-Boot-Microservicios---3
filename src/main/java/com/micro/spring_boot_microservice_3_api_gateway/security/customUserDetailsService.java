@@ -6,10 +6,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 import com.micro.spring_boot_microservice_3_api_gateway.service.userService;
 import com.micro.spring_boot_microservice_3_api_gateway.utils.securityUtils;
 import com.micro.spring_boot_microservice_3_api_gateway.model.user;
 
+@Service
 public class customUserDetailsService implements UserDetailsService{
 
     @Autowired
