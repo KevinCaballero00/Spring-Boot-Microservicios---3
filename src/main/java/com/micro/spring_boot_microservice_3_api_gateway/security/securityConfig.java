@@ -1,6 +1,7 @@
 package com.micro.spring_boot_microservice_3_api_gateway.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,6 +11,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.micro.spring_boot_microservice_3_api_gateway.security.jwt.jwtAutorizationFilter;
+
 import org.springframework.security.config.http.SessionCreationPolicy;
 
 @EnableWebSecurity
@@ -41,8 +46,14 @@ public class securityConfig {
                 .anyRequest().authenticated()
             )
             .authenticationManager(authenticationManager)
+            .addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
             return http.build();
+    }
+
+    @Bean
+    public jwtAutorizationFilter jwtAuthorizationFilter() {
+        return new jwtAutorizationFilter();
     }
 }

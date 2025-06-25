@@ -7,10 +7,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.graphql.GraphQlProperties.Http;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 import com.micro.spring_boot_microservice_3_api_gateway.security.userPrincipal;
 import com.micro.spring_boot_microservice_3_api_gateway.utils.securityUtils;
 import io.jsonwebtoken.Claims;
@@ -21,6 +21,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 
+@Component
 public class jwtProviderImpl implements jwtProvider {
 
     @Value("${app.jwt.secret}")
